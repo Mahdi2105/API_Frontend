@@ -33,6 +33,10 @@ Router
   }
 })
 
+.get('/:id/edit', (req, res, next) => {
+  res.render('editRestaurant', {restaurantID: req.params.id});
+})
+
 .get('/', async (req, res, next) => {
   try {
     const response = await fetch(url);
