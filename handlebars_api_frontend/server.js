@@ -22,10 +22,6 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/restaurants/new', (req, res) => {
-  res.render('newRestaurant');
-});
-
 app.listen(port, () => {
   console.log('Listening on port ' + port);
 });

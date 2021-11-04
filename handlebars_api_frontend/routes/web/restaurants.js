@@ -5,15 +5,32 @@ const config = require('../../config');
 const url = `${config.url.restaurants}`; // http://localhost:3002/api/restaurants
 
 Router
-  // READ
-  .get('/', async (req, res, next) => {
-    try {
-      const response = await fetch(url);
-      const restaurants = await response.json();
-      res.render('restaurants', { restaurants });
-    } catch (error) {
-      return next(error);
-    }
-  });
+
+.post('/', async (req, res, next) => {
+  try {
+    await fetch(url, {
+      method: 'post',
+      body: JSON.stringify(req.body),
+      headers: {'Content-Type': 'application/json'},
+    });
+    res.redirect('/restaurants');
+  } catch(error) {
+    return next(error);
+  }
+})
+
+.get('/new', (req, res, next) => {
+  res.render('newRestaurant');
+})
+
+.get('/', async (req, res, next) => {
+  try {
+    const response = await fetch(url);
+    const restaurants = await response.json();
+    res.render('restaurants', { restaurants });
+  } catch (error) {
+    return next(error);
+  }
+});
 
 module.exports = Router;
