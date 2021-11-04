@@ -23,6 +23,16 @@ Router
   res.render('newRestaurant');
 })
 
+.get('/:id', async (req, res, next) => {
+  try {
+    const response = await fetch(url + "/" + req.params.id)
+    const restaurant = await response.json();
+  res.render('restaurant', {restaurant});
+  } catch (error) {
+      return next(error);
+  }
+})
+
 .get('/', async (req, res, next) => {
   try {
     const response = await fetch(url);
